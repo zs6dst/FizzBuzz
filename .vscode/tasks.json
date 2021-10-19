@@ -1,0 +1,99 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile for ATTiny85",
+            "type": "shell",
+            "command": "avr-gcc",
+            "args": [
+                "-mmcu=attiny85",
+                "${workspaceFolder}\\*.c",
+                "-Os"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Program ATTiny85",
+            "type": "shell",
+            "command": "avrdude",
+            "args": []
+        },
+        {
+            "label": "Compile for ATMega328P",
+            "type": "shell",
+            "command": "avr-gcc",
+            "args": [
+                "-mmcu=atmega328p",
+                "main.c"
+            ],
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Convert for upload",
+            "type": "shell",
+            "command": "avr-objcopy",
+            "args": [
+                "-O",
+                "ihex",
+                "-j",
+                ".text",
+                "-j",
+                ".data",
+                "a.out",
+                "a.hex"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Upload to ATTiny85",
+            "dependsOn": [
+                "Compile for ATTiny85",
+                "Convert for upload"
+            ],
+            "type": "shell",
+            "command": "avrdude",
+            "args": [
+                "-C\"C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\etc\\avrdude.conf\"",
+                "-U lfuse:w:0x62:m",
+                "-U hfuse:w:0xdf:m",
+                "-e",
+                "-v",
+                "-pt85",
+                "-cstk500v1",
+                "-PCOM8",
+                "-b19200",
+                "-D",
+                "-Uflash:w:a.hex:i"
+            ]
+        },
+        {
+            "label": "Upload to ATMega328P",
+            "dependsOn": [
+                "Compile for ATMega328P",
+                "Convert for upload"
+            ],
+            "type": "shell",
+            "command": "avrdude",
+            "args": [
+                "-C\"C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\etc\\avrdude.conf\"",
+                "-U lfuse:w:0x62:m",
+                "-U hfuse:w:0xdf:m",
+                "-e",
+                "-v",
+                "-pm328p",
+                "-cstk500v1",
+                "-PCOM8",
+                "-b19200",
+                "-D",
+                "-Uflash:w:a.hex:i"
+            ]
+        }
+    ]
+}
