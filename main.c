@@ -69,7 +69,7 @@ void showNumber(int n)
     int ones = n % 10;
     int tens = (n - ones) / 10;
     pushDigit(MAP[ones]);
-    pushDigit(tens ? MAP[tens] : 0);
+    pushDigit(tens ? MAP[tens] : 0); //Suppress tens display when 0
     HI(LATCH);
     LO(LATCH);
 }
