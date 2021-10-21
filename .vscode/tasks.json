@@ -61,8 +61,6 @@
             "command": "avrdude",
             "args": [
                 "-C\"C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\etc\\avrdude.conf\"",
-                "-U lfuse:w:0x62:m",
-                "-U hfuse:w:0xdf:m",
                 "-e",
                 "-v",
                 "-pt85",
@@ -71,7 +69,8 @@
                 "-b19200",
                 "-D",
                 "-Uflash:w:a.hex:i"
-            ]
+            ],
+            "problemMatcher": []
         },
         {
             "label": "Upload to ATMega328P",
