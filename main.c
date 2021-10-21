@@ -22,7 +22,7 @@
 #define LO(P) PORTB &= ~P
 
 void showNumber(int n);
-void showDigit(int data);
+void pushDigit(int digit) ;
 
 //Mapping for 7-segment display
 int MAP[] = {
@@ -45,7 +45,7 @@ int main(void)
     int n = 0;
     while (1)
     {
-        if (++n == 10)
+        if (++n == 100)
             n = 1;
 
         showNumber(n);
@@ -67,23 +67,22 @@ int main(void)
 void showNumber(int n)
 {
     int ones = n % 10;
-    //int tens = (n - ones) / 10;
-    showDigit(MAP[ones]);
-    //pushData(TENS[tens]);
+    int tens = (n - ones) / 10;
+    pushDigit(MAP[ones]);
+    pushDigit(tens ? MAP[tens] : 0);
+    HI(LATCH);
+    LO(LATCH);
 }
 
-void showDigit(int data)
+void pushDigit(int digit)
 {
-    LO(LATCH);
     for (int pos = 7; pos >= 0; pos--)
     {
-        if (!!(data & (1 << pos)))
+        if (!!(digit & (1 << pos)))
             HI(DATA);
         else
             LO(DATA);
         HI(CLOCK);
         LO(CLOCK);
     }
-    HI(LATCH);
-    LO(LATCH);
 }
