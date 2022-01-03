@@ -12,35 +12,35 @@
 #include <avr/io.h>
 #include "util/delay.h"
 
-#define DATA (1 << PB0)
-#define LATCH (1 << PB1)
-#define CLOCK (1 << PB2)
-#define FIZZ (1 << PB3)
-#define BUZZ (1 << PB4)
+#define CLOCK   (1 << PB0)
+#define LATCH   (1 << PB1)
+#define DATA    (1 << PB2)
+#define FIZZ    (1 << PB4)  
+#define BUZZ    (1 << PB3)
 
-#define HI(P) PORTB |= P
-#define LO(P) PORTB &= ~P
+#define HI(P)   PORTB |= P
+#define LO(P)   PORTB &= ~P
 
-void showNumber(int n);
-void pushDigit(int digit) ;
-
-//Mapping for 7-segment display
+void showNumber(int);
+void pushDigit(int) ;
+ 
+//Mapping for 7-segment display (LSB is for decimal point, which is never used)
 int MAP[] = {
-    0b01111110, // 0
-    0b00001100, // 1
-    0b10110110, // 2
-    0b10011110, // 3
-    0b11001100, // 4
-    0b11011010, // 5
-    0b11111000, // 6
-    0b00001110, // 7
-    0b11111110, // 8
-    0b11001110, // 9
+    [0] = 0b01111110,
+    [1] = 0b00001100,
+    [2] = 0b10110110,
+    [3] = 0b10011110,
+    [4] = 0b11001100,
+    [5] = 0b11011010,
+    [6] = 0b11111000,
+    [7] = 0b00001110,
+    [8] = 0b11111110,
+    [9] = 0b11001110,
 };
 
 int main(void)
 {
-    DDRB = 0xFF;
+    DDRB = 0xFF; //All pins output
 
     int n = 0;
     while (1)

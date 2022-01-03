@@ -19,12 +19,6 @@
             "problemMatcher": []
         },
         {
-            "label": "Program ATTiny85",
-            "type": "shell",
-            "command": "avrdude",
-            "args": []
-        },
-        {
             "label": "Compile for ATMega328P",
             "type": "shell",
             "command": "avr-gcc",
@@ -52,7 +46,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Upload to ATTiny85",
+            "label": "Program ATTiny85",
             "dependsOn": [
                 "Compile for ATTiny85",
                 "Convert for upload"
@@ -73,7 +67,7 @@
             "problemMatcher": []
         },
         {
-            "label": "Upload to ATMega328P",
+            "label": "Program ATMega328P",
             "dependsOn": [
                 "Compile for ATMega328P",
                 "Convert for upload"
