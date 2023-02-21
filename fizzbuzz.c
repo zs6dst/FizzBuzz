@@ -1,8 +1,12 @@
+// Copyright 2021 Stoffel van Aswegen
+// Use of this source code is governed by the MIT licence
+// that can be found in the LICENCE file
+
+
 /*
 * FizzBuzz.c
 *
 * Created: 2021/10/14 07:39:27
-* Author : stoffel
 *
 * Target uC: ATTiny85
 */
