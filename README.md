@@ -15,3 +15,5 @@ The project was developed using:
 - avrdude to program the ATTiny85
 
 The project includes the task and C configuration files used by VS Code.
+
+[Video](https://github.com/zs6dst/FizzBuzz/issues/2) of completed device
